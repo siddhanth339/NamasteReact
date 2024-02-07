@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
@@ -19,7 +20,6 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(json);
     // Optional Chaining
     setListOfRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -32,7 +32,7 @@ const Body = () => {
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
+    <div className="body container">
       <div className="search">
         <input
           type="text"
@@ -65,7 +65,9 @@ const Body = () => {
       </div>
       <div className="res-container">
         {listOfFilteredRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} data={restaurant.info} />
+          <Link to={"restaurants/" + restaurant.info.id}>
+            <RestaurantCard key={restaurant.info.id} data={restaurant.info} />
+          </Link>
         ))}
       </div>
     </div>
