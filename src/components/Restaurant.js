@@ -1,26 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import MenuItem from "./MenuItem";
-import { restaurantDataAPI } from "../utils/constants.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
+import { useParams } from "react-router-dom";
 
 const Restaurant = () => {
-  const { id } = useParams();
-  const [menu, setMenu] = useState([]);
   const [vegOnly, setVegOnly] = useState(false);
-  useEffect(() => {
-    fetchResDetails();
-  }, []);
-
-  const fetchResDetails = async () => {
-    const data = await fetch(restaurantDataAPI + id);
-    const json = await data.json();
-
-    setMenu(json?.data?.cards);
-  };
-
-  return menu.length === 0 ? (
+  const { id } = useParams();
+  const menu = useRestaurantMenu(id);
+  return menu === null ? (
     <Shimmer />
   ) : (
     <div className="Restaurant container">
@@ -46,7 +36,6 @@ const Restaurant = () => {
           (category, index) => {
             if (category?.card?.card?.title !== undefined) {
               const menuDetails = category.card.card;
-              console.log(menuDetails);
               if (menuDetails.itemCards !== undefined)
                 return (
                   <MenuItem

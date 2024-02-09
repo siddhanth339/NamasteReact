@@ -2,32 +2,23 @@ import { Link } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
+import useRestaurantList from "../utils/useRestaurantList";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
-  const [listOfRestaurants, setListOfRestaurants] = useState([]);
+
   const [listOfFilteredRestaurants, setListOfFilteredRestaurants] = useState(
     []
   );
+  console.log("body");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-
-    const json = await data.json();
-    // Optional Chaining
-    setListOfRestaurants(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setListOfFilteredRestaurants(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-  };
+  const listOfRestaurants = useRestaurantList();
+  if (
+    listOfRestaurants.length !== 0 &&
+    listOfFilteredRestaurants.length === 0
+  ) {
+    setListOfFilteredRestaurants(listOfRestaurants);
+  }
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
