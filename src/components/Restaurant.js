@@ -13,7 +13,7 @@ const Restaurant = () => {
   return menu === null ? (
     <Shimmer />
   ) : (
-    <div className="Restaurant container">
+    <div className="container">
       <div className="form-check form-switch">
         <input
           className="form-check-input"
@@ -26,11 +26,13 @@ const Restaurant = () => {
         </label>
       </div>
       <h1>{menu[0].card.card.info.name}</h1>
-      <h4>{menu[0].card.card.info.areaName}</h4>
-      <h4>{menu[0].card.card.info.costForTwoMessage}</h4>
-      <h4>{menu[0].card.card.info.cuisines.join(", ")}</h4>
-      <h4>{menu[0].card.card.info.avgRating + " stars"}</h4>
-      <hr></hr>
+      <div className="text-center text-nowrap text-gray-400 flex">
+        <h6 className="my-2 mr-2">{menu[0].card.card.info.areaName}</h6>
+        <h6 className="m-2">{menu[0].card.card.info.costForTwoMessage}</h6>
+        <h6 className="m-2">{menu[0].card.card.info.cuisines.join(", ")}</h6>
+        <h6 className="m-2">{menu[0].card.card.info.avgRating + " stars"}</h6>
+        <hr></hr>
+      </div>
       <div className="menuItems">
         {menu[menu.length - 1].groupedCard.cardGroupMap.REGULAR.cards.map(
           (category, index) => {
