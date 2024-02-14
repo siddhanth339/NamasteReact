@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Body from "./components/Body";
 import Header from "./components/Header";
@@ -10,14 +10,25 @@ import Login from "./components/Login";
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import Shimmer from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
+
 const Grocery = lazy(() => import("./components/Grocery"));
 
-const AppLayout = () => (
-  <div className="app">
-    <Header />
-    <Outlet />
-  </div>
-);
+const AppLayout = () => {
+  const [user, setUser] = useState("user");
+  return (
+    <div className="app">
+      {/*the UserContext.Provider is used to update the values in React context,
+    for this, we need to wrap the component with UserContext.Provider and in the below example, 
+    the header component will have the value Siddhanth and in the other components
+    where we use React context, the value will be "Default User" (which is the default value set in the UserContext component) */}
+      <UserContext.Provider value={{ loggedInUser: user, setUser }}>
+        <Header />
+        <Outlet />
+      </UserContext.Provider>
+    </div>
+  );
+};
 
 const appRouter = createBrowserRouter([
   {

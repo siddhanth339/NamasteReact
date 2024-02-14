@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 
 const Restaurant = () => {
   const [vegOnly, setVegOnly] = useState(false);
+  // state variable to implement controlled components of menu items and is used for their visibility
+  const [showIndex, setShowIndex] = useState(0);
   const { id } = useParams();
   const menu = useRestaurantMenu(id);
   return menu === null ? (
@@ -45,6 +47,8 @@ const Restaurant = () => {
                     length={menuDetails.itemCards.length}
                     menuDetails={menuDetails.itemCards}
                     vegOnlyFlag={vegOnly}
+                    showItems={index === showIndex}
+                    callSetShowIndex={() => setShowIndex(index)}
                   ></MenuItem>
                 );
             }
