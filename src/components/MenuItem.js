@@ -2,9 +2,16 @@ import vegIcon from "../images/veg-icon.png";
 import nonVegIcon from "../images/non-veg-icon.png";
 import { MENUITEM_IMAGE_URL } from "../utils/constants";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 const MenuItem = (props) => {
   const { title, length, vegOnlyFlag, showItems, callSetShowIndex } = props;
   let { menuDetails } = props;
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };
   if (vegOnlyFlag)
     menuDetails = menuDetails.filter(
       (item) => item.card.info.itemAttribute.vegClassifier === "VEG"
@@ -46,7 +53,10 @@ const MenuItem = (props) => {
                 </p>
               </div>
               <div className="relative w-3/12">
-                <button className="p-2 rounded-lg bg-white shadow-lg">
+                <button
+                  onClick={() => handleAddItem(res)}
+                  className="p-2 rounded-lg bg-white shadow-lg"
+                >
                   Add +
                 </button>
                 <img
