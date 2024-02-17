@@ -33,12 +33,6 @@ const CartItem = (props) => {
             </p>
           </div>
           <div className="relative w-3/12">
-            <button
-              onClick={() => handleAddItem(res)}
-              className="p-2 rounded-lg bg-white shadow-lg"
-            >
-              Add +
-            </button>
             <img
               className="rounded-lg"
               src={MENUITEM_IMAGE_URL + res.card.info.imageId}
