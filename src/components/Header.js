@@ -3,7 +3,7 @@ import Logo_URL from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
-import { UseSelector, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
@@ -30,7 +30,6 @@ const Header = () => {
           <Link to="/cart">
             <li className="px-4 font-bold text-xl">
               Cart - {cartItems.length}
-              {console.log(cartItems)}
             </li>
           </Link>
           <li className="px-4">

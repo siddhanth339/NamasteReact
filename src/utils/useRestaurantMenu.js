@@ -5,7 +5,6 @@ import { restaurantMenuDataAPI } from "./constants";
 // gets list of all menu items of a restaurant from Swiggy API
 const useRestaurantMenu = (id) => {
   const [menu, setMenu] = useState(null);
-  console.log("inside hook");
   console.log(menu);
   useEffect(() => {
     fetchRestaurantMenu();

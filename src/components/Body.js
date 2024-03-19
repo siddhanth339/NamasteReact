@@ -46,7 +46,7 @@ const Body = () => {
             Search
           </button>
           <button
-            className="px-4 py-2 bg-gray-50 rounded-lg"
+            className="px-4 py-2 ml-2 bg-gray-400 rounded-lg"
             onClick={() => {
               const res = listOfRestaurants.filter(
                 (res) => res.info.avgRating > 4
@@ -56,7 +56,7 @@ const Body = () => {
           >
             Top rated restaurants
           </button>
-          <label>Username: </label>
+          <label className="ml-2">SetUsername: </label>
           <input
             type="text"
             className="mx-2 border border-solid border-black"
